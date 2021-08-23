@@ -20,7 +20,7 @@ serverless = {
       }
 
       # Custom domain
-      domain_name                 = "pacificbluepine.com"
+      domain_name                 = "api.pacificbluepine.com"
       domain_name_certificate_arn = "arn:aws:acm:us-east-1:539790979880:certificate/386acf1c-ac20-4348-b0eb-a7615c2e89e9"
 
       # Access logs
