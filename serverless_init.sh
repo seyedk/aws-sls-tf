@@ -1,0 +1,1 @@
+tf init  -backend-config=examples/data/backend.tfvars -backend-config="key=data/terraform.tfstate"

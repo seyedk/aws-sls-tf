@@ -1,0 +1,7 @@
+[{
+  
+    "DetailType": "Parameter Store Change",
+    "Source": "myapp.events",
+ 
+    "Detail": "{ \"Operatio\": \"Update\",        \"Name\": \"/canaries/ServiceFirst/Active\"    }"
+}]
