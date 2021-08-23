@@ -1,7 +1,6 @@
 serverless = {
   backend_type        = "s3"
   level               = "level0"
-  key                 = "data/terraform.tfstate"
   global_settings_key = "foundation"
   key                 = "data"
   tfstate_bucket_name = "seyedk-tf-accelerator-state-mgmt"

@@ -26,5 +26,6 @@ locals {
     elbs = try(var.networking.elbs, {})
   }
   functions =try(var.functions, {})
+  api_gateways = try(var.api_gateways,{})
 }
 
