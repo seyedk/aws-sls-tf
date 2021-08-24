@@ -33,6 +33,66 @@ serverless = {
         Name = "http-apigateway"
       }
 
+      integrations = {
+
+        "POST /" = {
+          service_name           = "data"
+          function_name          = "function1"
+          payload_format_version = "2.0"
+          timeout_milliseconds   = 12000
+        }
+        "GET /" = {
+          service_name           = "experience"
+          function_name          = "function_B"
+          payload_format_version = "2.0"
+          timeout_milliseconds   = 12000
+
+        }
+      }
+
+
+    }
+    api2 = {
+      name          = "qa-http"
+      description   = "My second HTTP API Gateway"
+      protocol_type = "HTTP"
+      cors_configuration = {
+        allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token", "x-amz-user-agent"]
+        allow_methods = ["*"]
+        allow_origins = ["*"]
+      }
+
+      # Custom domain
+      domain_name                 = "api.pacificbluepine.com"
+      domain_name_certificate_arn = "arn:aws:acm:us-east-1:539790979880:certificate/386acf1c-ac20-4348-b0eb-a7615c2e89e9"
+
+      # Access logs
+      default_stage_access_log_destination_arn = "arn:aws:logs:us-east-1:539790979880:log-group:debug-apigateway"
+      default_stage_access_log_format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"
+
+
+
+      tags = {
+        Name = "http-apigateway"
+        environment = "QA"
+      }
+
+      integrations = {
+
+        "POST /" = {
+          service_name           = "data"
+          function_name          = "function1"
+          payload_format_version = "2.0"
+          timeout_milliseconds   = 12000
+        }
+        "GET /" = {
+          service_name           = "experience"
+          function_name          = "function_B"
+          payload_format_version = "2.0"
+          timeout_milliseconds   = 12000
+
+        }
+      }
 
 
     }

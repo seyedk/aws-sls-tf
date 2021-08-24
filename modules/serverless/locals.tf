@@ -29,3 +29,21 @@ locals {
   api_gateways = try(var.api_gateways,{})
 }
 
+locals {
+  integrations = {
+    for api_key, api_value in local.api_gateways: 
+    api_key => {
+      for key, value in api_value.integrations: 
+      key => {
+          lambda_arn = local.combined_objects_functions[value.service_name][value.function_name].lambda_function_arn
+          payload_format_version = value.payload_format_version
+          timeout_milliseconds   = value.timeout_milliseconds
+      }
+    }
+
+
+  }
+}
+output "my_integrations" {
+  value = local.integrations
+}

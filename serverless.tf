@@ -1,12 +1,12 @@
 module "sls_app1" {
 
-  source          = "./modules/serverless"
-  functions       = local.functions
-   api_gateways    = local.api_gateways
-#   ddb_tables      = local.ddb_tables
+  source       = "./modules/serverless"
+  functions    = local.functions
+  api_gateways = local.api_gateways
+  #   ddb_tables      = local.ddb_tables
   global_settings = local.global_settings
 
-#   websites = local.websites
+  #   websites = local.websites
   tfstates = var.serverless.tfstates
 
   tags           = local.tags
@@ -14,8 +14,8 @@ module "sls_app1" {
 
   networking             = local.networking
   current_serverless_key = var.serverless.key
-  integrations = {}
-  client_config = {}
+  integrations           = {}
+  client_config          = {}
 
 }
 
@@ -23,10 +23,10 @@ output "objects" {
   value = tomap(
     {
       (var.serverless.key) = {
-        for key, value in module.sls_app1: key => value
-        if try(value , {}) != {}
+        for key, value in module.sls_app1 : key => value
+        if try(value, {}) != {}
       }
     }
   )
-  
+
 }
