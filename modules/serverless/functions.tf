@@ -21,6 +21,6 @@ module "functions" {
 }
 
 
-output "sls_lambdas" {
+output "functions" {
   value = module.functions
 }
