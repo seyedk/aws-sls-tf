@@ -1,4 +1,4 @@
 locals {
-    tags = var.serverless.tags
+    tags = try(var.serverless.tags,{})
 
 }

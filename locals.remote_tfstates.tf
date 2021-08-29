@@ -40,7 +40,7 @@ locals {
 
   }
 
-  global_settings = var.serverless.global_settings
+  global_settings = try(var.serverless.global_settings,{})
 }
 
 
