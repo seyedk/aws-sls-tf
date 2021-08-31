@@ -1,7 +1,4 @@
-output "vpcs" {
 
-  value = module.networking
-}
 
 resource "random_pet" "this" {
   length = 2

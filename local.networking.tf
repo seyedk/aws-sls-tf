@@ -1,14 +1,5 @@
 locals {
 
-  networking = var.serverless.networking
+  networking = try(var.serverless.networking,{})
   
 }
-# locals {
-
-#   networking = merge(
-#     var.networking, {
-
-#       vpc = var.vpcs
-#     }
-#   )
-# }
