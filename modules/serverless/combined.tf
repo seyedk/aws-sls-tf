@@ -28,12 +28,12 @@ locals {
   )
 }
 
-output "remote_objects_functions" {
-  value = local.combined_objects_functions
+# output "remote_objects_functions" {
+#   value = local.combined_objects_functions
   
-}
+# }
 
-output "remote_objects_apigateway" {
-  value = local.combined_objects_api_gateways
-}
+# output "remote_objects_apigateway" {
+#   value = local.combined_objects_api_gateways
+# }
 

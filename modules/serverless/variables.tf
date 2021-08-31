@@ -1,16 +1,30 @@
-variable "global_settings" {}
-variable "tfstates" {}
-variable "tags" {}
-variable "remote_objects" {}
-variable "current_serverless_key" {}
+variable "global_settings" {
+    default = {}
+}
+variable "tfstates" {
+    default = {}
+}
+variable "tags" {
+    default = {}
+}
+variable "remote_objects" {
+    default = {}
+}
+variable "current_serverless_key" {
+    default = {}
+}
 variable "api_gateways" {
     default = {}
 }
-variable "integrations" {}
+variable "integrations" {
+    default = {}
+}
 variable "functions" {
     default = {}
 } 
-variable "client_config" {}
+variable "client_config" {
+    default = {}
+}
 
 
 

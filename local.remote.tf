@@ -12,5 +12,6 @@ locals  {
         api_gateways = {
             for key, value in try(var.serverless.tfstates,{}): key => merge(try(data.terraform_remote_state.remote[key].outputs.objects[key].api_gateways,{}))
         }
+        
     }
 }

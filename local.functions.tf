@@ -10,9 +10,8 @@
 locals {
 
   functions = merge(
-    var.serverless.functions, {
-
-   
+    try(var.serverless.functions,{}), {
+  
     }
   )
 }

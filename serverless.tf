@@ -7,7 +7,7 @@ module "sls_app1" {
   global_settings = local.global_settings
 
   #   websites = local.websites
-  tfstates = var.serverless.tfstates
+  tfstates = try(var.serverless.tfstates,{})
 
   tags           = local.tags
   remote_objects = local.remote
