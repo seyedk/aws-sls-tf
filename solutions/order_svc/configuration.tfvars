@@ -94,7 +94,7 @@ serverless = {
         }
         "GET /" = {
           service_name           = "experience"
-          function_name          = "function_B"
+          function_name          = "function_A"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
 
