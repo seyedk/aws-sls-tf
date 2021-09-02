@@ -1,9 +1,8 @@
-module "sls_app1" {
+module "aws_sls_model" {
 
   source       = "./modules/serverless"
   functions    = local.functions
-  ec2 = local.virtual_machines
-  k8s = local.kubernetes_config
+
   api_gateways = local.api_gateways
   #   ddb_tables      = local.ddb_tables
   global_settings = local.global_settings
@@ -25,7 +24,7 @@ output "objects" {
   value = tomap(
     {
       (var.serverless.key) = {
-        for key, value in module.sls_app1 : key => value
+        for key, value in module.aws_sls_model : key => value
         if try(value, {}) != {}
       }
     }
