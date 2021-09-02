@@ -2,6 +2,8 @@ module "sls_app1" {
 
   source       = "./modules/serverless"
   functions    = local.functions
+  ec2 = local.virtual_machines
+  k8s = local.kubernetes_config
   api_gateways = local.api_gateways
   #   ddb_tables      = local.ddb_tables
   global_settings = local.global_settings
