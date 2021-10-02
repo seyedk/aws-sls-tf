@@ -1,9 +1,9 @@
 locals {
 
-  combined_objects_networking = merge(
+  combined_objects_vpcs = merge(
     tomap(
       {
-        (local.client_config.serverless_key) = module.networking
+        (local.client_config.serverless_key) = module.vpcs
       }
     ),
     try(var.remote_objects.vpcs, {})
@@ -28,12 +28,17 @@ locals {
   )
 }
 
-# output "remote_objects_functions" {
-#   value = local.combined_objects_functions
+output "combined_objects_functions" {
+  value = local.combined_objects_functions
   
-# }
+}
 
-# output "remote_objects_apigateway" {
-#   value = local.combined_objects_api_gateways
-# }
+output "combined_objects_apigateway" {
+  value = local.combined_objects_api_gateways
+}
+
+output "combined_objects_vpcs" {
+  value = local.combined_objects_vpcs
+
+}
 

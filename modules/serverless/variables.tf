@@ -13,6 +13,9 @@ variable "remote_objects" {
 variable "current_serverless_key" {
     default = {}
 }
+variable "serverless" {
+    default = {}
+}
 variable "api_gateways" {
     default = {}
 }

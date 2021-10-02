@@ -1,6 +1,5 @@
 serverless = {
   backend_type        = "s3"
-  level               = "level2"
   global_settings_key = "application"
   key                 = "orders_service"
   tfstate_bucket_name = "seyedk-tf-accelerator-state-mgmt"
@@ -27,12 +26,14 @@ serverless = {
       # Access logs
       default_stage_access_log_destination_arn = "arn:aws:logs:us-east-1:539790979880:log-group:debug-apigateway"
       default_stage_access_log_format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"
-    
+
 
 
       tags = {
         Name = "http-apigateway"
       }
+
+
 
       integrations = {
 
@@ -51,7 +52,7 @@ serverless = {
         }
         "POST /services" = {
           service_name           = "data"
-          function_name          = "function1"
+          function_name          = "public_function"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
         }
@@ -70,31 +71,31 @@ serverless = {
       }
 
       # Custom domain
-      domain_name                 = "api.example.com"
-      domain_name_certificate_arn = "arn:aws:acm:us-east-1:539790979880:certificate/386acf1c-ac20-4348-b0eb-a7615c2e89e9"
+      # domain_name                 = "api.example.com"
+      # domain_name_certificate_arn = "arn:aws:acm:us-east-1:539790979880:certificate/386acf1c-ac20-4348-b0eb-a7615c2e89e9"
 
-      # Access logs
-      default_stage_access_log_destination_arn = "arn:aws:logs:us-east-1:539790979880:log-group:debug-apigateway"
-      default_stage_access_log_format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"
+      # # Access logs
+      # default_stage_access_log_destination_arn = "arn:aws:logs:us-east-1:539790979880:log-group:debug-apigateway"
+      # default_stage_access_log_format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"
 
 
 
       tags = {
-        Name = "http-apigateway"
+        Name        = "http-apigateway"
         environment = "QA"
       }
 
       integrations = {
 
-        "POST /" = {
-          service_name           = "data"
-          function_name          = "function1"
+        "POST /users" = {
+          service_name           = "experience"
+          function_name          = "function_3"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
         }
-        "GET /" = {
+        "GET /users" = {
           service_name           = "experience"
-          function_name          = "function_A"
+          function_name          = "function_3"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
 
@@ -112,14 +113,9 @@ serverless = {
 
   }
 
-  functions  = {}
-  networking = {
-    vpc = {
-      service = "data"
-      subnet_types = "private"
-    }
-    
-  }
+  functions = {}
+  vpcs = {}
+
   tags = {
     application_name = "experience service"
     owner            = "seyed"
@@ -128,7 +124,6 @@ serverless = {
 
   tfstates = {
     data = {
-      level   = "level0"
       tfstate = "data/terraform.tfstate"
 
       region         = "us-east-1"
@@ -137,13 +132,13 @@ serverless = {
 
     }
     experience = {
-      level   = "level1"
       tfstate = "experience/terraform.tfstate"
 
       region         = "us-east-1"
       dynamodb_table = "seyedk-tf-accelerator-state-mgmt"
       encrypt        = true
     }
-  }
-}
 
+  }
+
+}

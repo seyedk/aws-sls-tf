@@ -1,5 +1,7 @@
 locals {
 
-  networking = try(var.serverless.networking,{})
+  vpcs = merge(try(var.serverless.vpcs,{}),{})
+  
   
 }
+

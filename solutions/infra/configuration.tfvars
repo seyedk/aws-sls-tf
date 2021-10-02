@@ -1,15 +1,9 @@
 serverless = {
   backend_type        = "s3"
-  level               = "level2"
-  key                 = "foundation"
   global_settings_key = "foundation"
-  key                 = "orders"
+  key                 = "infra"
   tfstate_bucket_name = "seyedk-tf-accelerator-state-mgmt"
 
-
-
-
-  networking = {
     vpcs = {
 
       db_vpc = {
@@ -20,8 +14,7 @@ serverless = {
 
         # Add public_subnets and NAT Gateway to allow access to internet from Lambda
         public_subnets     = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
-        enable_nat_gateway = true
-
+        enable_nat_gateway = false
 
       }
       app_vpc = {
@@ -35,9 +28,12 @@ serverless = {
         enable_nat_gateway = false
 
 
+
       }
+
+      
     }
-  }
+
 }
 
 

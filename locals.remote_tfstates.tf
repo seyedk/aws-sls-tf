@@ -19,7 +19,6 @@ data "terraform_remote_state" "remote" {
   backend = var.serverless.backend_type
   config  = local.remote_state[try(each.value.backend_type, var.serverless.backend_type, "s3")][each.key]
 
-
 }
 
 locals {
@@ -37,6 +36,8 @@ locals {
 
       }
     }
+    
+
 
   }
 

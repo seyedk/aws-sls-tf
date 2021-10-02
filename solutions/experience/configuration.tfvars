@@ -1,12 +1,11 @@
 serverless = {
-  backend_type        = "s3"
-  level               = "level0"
- 
+  backend_type = "s3"
+
   global_settings_key = "foundation"
   key                 = "experience"
-  tfstate_bucket_name              = "seyedk-tf-accelerator-state-mgmt"
+  tfstate_bucket_name = "seyedk-tf-accelerator-state-mgmt"
 
-  
+
 
   functions = {
     function2 = {
@@ -34,7 +33,18 @@ serverless = {
 
       }
     }
+    function_3 = {
+      function_name = "exp-lambda-3"
+      description   = "experience 3 lambda function"
+      handler       = "index.lambda_handler"
+      runtime       = "python3.8"
+      source_path   = "../../src/functionB.zip"
+      tags = {
+        environment = "dev"
+        developer   = "seyedk"
 
+      }
+    }
 
   }
   tags = {
@@ -49,7 +59,7 @@ serverless = {
 
   }
   api_gateways = {}
-  networking   = {}
+  vpcs   = {}
   tfstates     = {}
 
 

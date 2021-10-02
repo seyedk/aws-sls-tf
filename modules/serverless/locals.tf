@@ -19,31 +19,63 @@ locals {
 
 
 
-  networking = {
+  vpcs = try(var.vpcs, {})
 
-    vpcs = try(var.networking.vpcs, {})
-    albs = try(var.networking.albs, {})
-    elbs = try(var.networking.elbs, {})
-  }
-  functions =try(var.functions, {})
-  api_gateways = try(var.api_gateways,{})
+
+  functions    = try(var.functions, {})
+  api_gateways = try(var.api_gateways, {})
 }
+
 
 locals {
   integrations = {
-    for api_key, api_value in local.api_gateways: 
+    for api_key, api_value in local.api_gateways :
     api_key => {
-      for key, value in api_value.integrations: 
+      for key, value in api_value.integrations :
       key => {
-          lambda_arn = local.combined_objects_functions[value.service_name][value.function_name].lambda_function_arn
-          payload_format_version = value.payload_format_version
-          timeout_milliseconds   = value.timeout_milliseconds
+        lambda_arn             = local.combined_objects_functions[value.service_name][value.function_name].lambda_function_arn
+        payload_format_version = value.payload_format_version
+        timeout_milliseconds   = value.timeout_milliseconds
       }
     }
 
 
   }
+
 }
+
+# locals {
+
+#   vpc_info2 = {
+#     for f_key, f_value in local.functions :
+
+#     f_key => {
+#       for key, value in try(f_value.vpc_info2, {}) :
+#       key => {
+#         vpc_subnet_ids         = local.combined_objects_vpcs[key][value.vpc_key][value.subnet_key]
+#         vpc_security_group_ids = local.combined_objects_vpcs[key][value.vpc_key]["default_security_group_id"]
+
+#       }
+
+#     }
+#   }
+# }
+
+locals {
+
+  vpc_info = {
+    for f_key, f_value in local.functions :
+
+    f_key => {
+      vpc_subnet_ids = lookup(f_value, "vpc_info", null) == null ? null: local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key][f_value.vpc_info.subnet_key]
+       vpc_security_group_ids = lookup(f_value, "vpc_info", null) == null ? null:local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key]["default_security_group_id"]
+    }
+  }
+}
+output "my_vpc_info" {
+  value = local.vpc_info
+}
+
 output "my_integrations" {
   value = local.integrations
 }

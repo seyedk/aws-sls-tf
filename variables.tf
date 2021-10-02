@@ -14,13 +14,15 @@ variable "current_serverless_key" {
 }
 
 
+
+
 variable "remote_objects" {
   default = {}
 
 }
 
 # variable "tfstate_bucket_name" {} 
-variable "networking" {
+variable "vpcs" {
   default = {}
 }
 

@@ -4,11 +4,11 @@ resource "random_pet" "this" {
   length = 2
 }
 
-module "networking" {
+module "vpcs" {
   #   depends_on = []
 
   source   = "terraform-aws-modules/vpc/aws"
-  for_each = local.networking.vpcs
+  for_each = try(local.vpcs,  {})
   #todo: do we want to add the security groups here? I guess so!
   #   security_groups = module.security_groups
 
@@ -25,13 +25,13 @@ module "networking" {
 
 }
 
-variable "networking" {
+variable "vpcs" {
 
   default = {}
 
 }
 
 
-output "networking" {
-  value = module.networking
+output "vpcs" {
+  value = module.vpcs
 }
