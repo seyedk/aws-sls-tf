@@ -89,7 +89,7 @@ One important parameter is `key` and its value. This is what we'll use in other 
 
 ```dotnetcli
 
-networking = {
+
     vpcs = {
 
       db_vpc = {
@@ -105,7 +105,7 @@ networking = {
 
     }
 
-  }
+  
 
 ```
 
@@ -116,7 +116,7 @@ Now for the Data layer at [here](solutions/data/configuration.tfvars), where we 
 
     tfstates = {
       infra = {
-        tfstate = "infra_svc/terraform.tfstate"
+        tfstate = "infra/terraform.tfstate"
     
         region         = "us-east-1"
         dynamodb_table = "seyedk-tf-accelerator-state-mgmt"
@@ -145,11 +145,9 @@ private_function = {
 
       }
       vpc_info = {
-        infra = {
-          vpc_key    = "db_vpc"
-          subnet_key = "intra_subnets"
-
-        }
+        layer_key  = "infra"
+        vpc_key    = "db_vpc"
+        subnet_key = "public_subnets"
       }
 
     }
@@ -166,22 +164,17 @@ To see that in action, open the locals [here at](modules/serverless/locals.tf). 
 locals {
 
   vpc_info = {
-    for f_key, f_value in local.functions:
-    
-    f_key =>{
-      for key,value in try(f_value.vpc_info,{}):
-      key => {
-          vpc_subnet_ids = local.combined_objects_vpcs[key][value.vpc_key][value.subnet_key]
-          vpc_security_group_ids = local.combined_objects_vpcs[key][value.vpc_key]["default_security_group_id"]
+    for f_key, f_value in local.functions :
 
-     }
-
+    f_key => {
+      vpc_subnet_ids = lookup(f_value, "vpc_info", null) == null ? null: local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key][f_value.vpc_info.subnet_key]
+       vpc_security_group_ids = lookup(f_value, "vpc_info", null) == null ? null:local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key]["default_security_group_id"]
+    }
   }
-}
 }
 ```
 
-In the code snippet above, the combined_objects_vpcs, as implied by its name, combines all the remote objects and current objects together to provide easy access to the networking elements to this layer. As we have requested to look at the `infra` layer, the `local.combined_objects_vpcs[key]` will surely contain all networking elements of `infra` when the `key=infra`. For the example configurations of data and infra, the vpc_info above will produce following data model: 
+In the code snippet above, the combined_objects_vpcs, as implied by its name, combines all the remote objects and current objects together to provide easy access to the networking elements to this layer. As we have requested to look at the `infra` layer, the `local.combined_objects_vpcs[f_value.vpc_info.layer_key]` will surely contain all networking elements of `infra` when the `key=infra`. For the example configurations of data and infra, the vpc_info above will produce following data model:  
 
 ```dotnetcli
  vpc_info = {
@@ -200,5 +193,5 @@ In the code snippet above, the combined_objects_vpcs, as implied by its name, co
             }
 ```
 
-in our lambda function, we'll be using local.vpc_info to get the vpc_subnet_ids required for out function: 
+in our lambda function, we'll be using local.vpc_info to get the vpc_subnet_ids required for out function:   
 
