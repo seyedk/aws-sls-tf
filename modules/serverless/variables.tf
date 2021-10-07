@@ -30,6 +30,12 @@ variable "client_config" {
 }
 
 
+variable "cognito_userpools" {
+
+  default = {}
+}
+
+
 
 
 

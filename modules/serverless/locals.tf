@@ -24,6 +24,8 @@ locals {
 
   functions    = try(var.functions, {})
   api_gateways = try(var.api_gateways, {})
+
+   cognito_userpools = try(var.cognito_userpools, {})
 }
 
 
@@ -44,22 +46,12 @@ locals {
 
 }
 
+
 # locals {
+#   cognito_userpools_integration = local.combined_objects_cognito_userpools
 
-#   vpc_info2 = {
-#     for f_key, f_value in local.functions :
-
-#     f_key => {
-#       for key, value in try(f_value.vpc_info2, {}) :
-#       key => {
-#         vpc_subnet_ids         = local.combined_objects_vpcs[key][value.vpc_key][value.subnet_key]
-#         vpc_security_group_ids = local.combined_objects_vpcs[key][value.vpc_key]["default_security_group_id"]
-
-#       }
-
-#     }
-#   }
 # }
+
 
 locals {
 
@@ -67,8 +59,8 @@ locals {
     for f_key, f_value in local.functions :
 
     f_key => {
-      vpc_subnet_ids = lookup(f_value, "vpc_info", null) == null ? null: local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key][f_value.vpc_info.subnet_key]
-       vpc_security_group_ids = lookup(f_value, "vpc_info", null) == null ? null:local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key]["default_security_group_id"]
+      vpc_subnet_ids         = lookup(f_value, "vpc_info", null) == null ? null : local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key][f_value.vpc_info.subnet_key]
+      vpc_security_group_ids = lookup(f_value, "vpc_info", null) == null ? null : local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key]["default_security_group_id"]
     }
   }
 }
@@ -76,6 +68,10 @@ output "my_vpc_info" {
   value = local.vpc_info
 }
 
-output "my_integrations" {
+output "lambda_integrations" {
   value = local.integrations
 }
+
+# output "cognito_userpools_integration" {
+#   value = local.cognito_userpools_integration
+# }

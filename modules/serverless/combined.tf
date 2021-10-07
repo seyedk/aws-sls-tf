@@ -1,5 +1,13 @@
 locals {
 
+  combined_objects_cognito_userpools = merge(
+    tomap(
+      {
+        (local.client_config.serverless_key) = module.cognito_userpools
+      }
+    ),
+    try(var.remote_objects.cognito_userpools, {})
+  )
   combined_objects_vpcs = merge(
     tomap(
       {

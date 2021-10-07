@@ -5,4 +5,11 @@ provider "aws" {
   skip_region_validation      = true
   skip_credentials_validation = true
   skip_requesting_account_id  = true
+   default_tags  {
+     tags = var.serverless.tags
+   }
+}
+
+variable "mytag" {
+  default =  "my-test-tag"
 }

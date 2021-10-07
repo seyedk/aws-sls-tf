@@ -19,11 +19,14 @@ module "aws_sls_model" {
   integrations           = {}
   client_config          = {}
 
+  cognito_userpools = local.cognito_userpools
+
 
 
 }
 
 output "objects" {
+  sensitive = true
   value = tomap(
     {
       (var.serverless.key) = {

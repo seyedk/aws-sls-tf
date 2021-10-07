@@ -13,10 +13,18 @@ locals  {
             for key, value in try(var.serverless.tfstates,{}): key => merge(try(data.terraform_remote_state.remote[key].outputs.objects[key].api_gateways,{}))
         }
 
+        cognito_userpools = {
+             for key, value in try(var.serverless.tfstates,{}): key => merge(try(data.terraform_remote_state.remote[key].outputs.objects[key].cognito_userpools,{}))
+        }
+        eks_clusters = {
+
+            for key, value in try(var.serverless.tfstates,{}): key => merge(try(data.terraform_remote_state.remote[key].outputs.objects[key].eks_cluster,{}))
+        }
+
         
     }
 }
 
-output "z_delete_me" {
+output "ztest_delete_me" {
     value = local.remote.vpcs
 }

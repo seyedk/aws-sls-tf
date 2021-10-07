@@ -4,7 +4,41 @@ serverless = {
   key                 = "data"
   tfstate_bucket_name = "seyedk-tf-accelerator-state-mgmt"
 
-  vpcs         = {}
+
+  cognito_userpools = {
+    swimming_pool = {
+      user_pool_name = "swimming_pool"
+      tags = {
+        Owner       = "infra"
+        Environment = "production"
+        Terraform   = true
+      }
+    }
+    eithball_pool = {
+      user_pool_name = "8ball_pool"
+      tags = {
+        Owner       = "infra"
+        Environment = "production"
+        Terraform   = true
+      }
+    }
+  }
+
+  vpcs = {
+
+    lambda_vpc = {
+
+      cidr            = "192.168.0.0/16"
+      azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
+      private_subnets = ["192.168.101.0/24", "192.168.102.0/24", "192.168.103.0/24"]
+      # Add public_subnets and NAT Gateway to allow access to internet from Lambda
+      public_subnets     = ["192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24"]
+      enable_nat_gateway = true
+
+
+
+    }
+  }
   api_gateways = {}
 
 
@@ -20,14 +54,12 @@ serverless = {
         developer   = "seyedk"
 
       }
-      # vpc_info = {
+      vpc_info = {
 
-      #   layer_key  = "infra"
-      #   vpc_key    = "db_vpc"
-      #   subnet_key = "intra_subnets"
-
-
-      # }
+        layer_key  = "data"
+        vpc_key    = "lambda_vpc"
+        subnet_key = "public_subnets"
+      }
     }
 
 
@@ -111,7 +143,7 @@ serverless = {
 
     }
 
-
   }
 }
+
 

@@ -40,3 +40,8 @@ variable "integrations" {
 
   }
 }
+
+variable "cognito_userpools" {
+
+  default = {}
+}
