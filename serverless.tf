@@ -19,7 +19,7 @@ module "aws_sls_model" {
   integrations           = {}
   client_config          = {}
 
-  cognito_userpools = local.cognito_userpools
+  cognito_userpools = var.serverless.cognito_userpools
 
 
 

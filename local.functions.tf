@@ -1,9 +1,4 @@
 
 locals {
-
-  functions = merge(
-    try(var.serverless.functions,{}), {
-  
-    }
-  )
+  functions = merge(try(var.serverless.functions, {}), {})
 }
