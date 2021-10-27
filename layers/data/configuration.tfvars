@@ -122,7 +122,6 @@ serverless = {
 
       }
       vpc_info = {
-
         layer_key  = "data"
         vpc_key    = "lambda_vpc"
         subnet_key = "public_subnets"

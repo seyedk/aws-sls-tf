@@ -1,0 +1,1 @@
+aws ec2 create-network-interface --subnet-id subnet-04a28a4331c0f9888 --description "my network interface" --groups sg-0c7a9e1568cba8710 --private-ip-address 10.10.103.17

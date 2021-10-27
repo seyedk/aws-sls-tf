@@ -33,5 +33,8 @@ override.tf.json
 .terraformrc
 terraform.rc
 **/builds/*
+<<<<<<< HEAD
+=======
 **/.terraform.lock.hcl
 
+>>>>>>> bb8c83a2b3c2032cb7442b77632fd8bc152ecc86

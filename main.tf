@@ -1,6 +1,6 @@
 module "aws_sls_model" {
 
-  source = "./modules/serverless"
+  source = "./serverless"
 
   functions    = local.functions
   api_gateways = local.api_gateways
