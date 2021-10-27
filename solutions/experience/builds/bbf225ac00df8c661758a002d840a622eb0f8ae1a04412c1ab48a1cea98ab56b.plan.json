@@ -1,1 +1,0 @@
-{"filename": "builds/bbf225ac00df8c661758a002d840a622eb0f8ae1a04412c1ab48a1cea98ab56b.zip", "runtime": "python3.8", "artifacts_dir": "builds", "build_plan": [["zip", "../../src/function2.zip", null]]}
