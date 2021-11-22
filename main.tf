@@ -21,6 +21,9 @@ module "aws_sls_model" {
 
   cognito_userpools = local.cognito_userpools
 
+  s3_buckets = local.s3_buckets
+  s3_bucket_objects = local.s3_bucket_objects
+
 
 
 }

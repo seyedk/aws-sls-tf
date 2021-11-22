@@ -3,7 +3,7 @@ module "functions" {
   source   = "terraform-aws-modules/lambda/aws"
   for_each = local.functions
   depends_on = [
-    module.vpcs
+    module.vpcs, module.api_gateways
   ]
 
   function_name          = each.value.function_name
@@ -15,6 +15,8 @@ module "functions" {
   vpc_subnet_ids         = local.vpc_info[each.key].vpc_subnet_ids
   vpc_security_group_ids = [local.vpc_info[each.key].vpc_security_group_ids]
   attach_network_policy  = true
+
+  allowed_triggers = try(each.value.allowed_triggers, {})
 
 }
 
