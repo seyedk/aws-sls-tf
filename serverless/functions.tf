@@ -16,7 +16,7 @@ module "functions" {
   vpc_security_group_ids = [local.vpc_info[each.key].vpc_security_group_ids]
   attach_network_policy  = true
 
-  # allowed_triggers = try(each.value.allowed_triggers, {})
+  allowed_triggers = try(each.value.allowed_triggers, {})
 
 }
 
