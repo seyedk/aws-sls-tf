@@ -12,12 +12,12 @@ module "api_gateways" {
   cors_configuration = each.value.cors_configuration
 
   # Custom domain
-  domain_name                 = each.value.domain_name
-  domain_name_certificate_arn = each.value.domain_name_certificate_arn
+  domain_name                 = try(each.value.domain_name, {})
+  domain_name_certificate_arn = try(each.value.domain_name_certificate_arn, {})
 
   # # Access logs
-  default_stage_access_log_destination_arn = each.value.default_stage_access_log_destination_arn
-  default_stage_access_log_format          = each.value.default_stage_access_log_format
+  default_stage_access_log_destination_arn = try(each.value.default_stage_access_log_destination_arn, {})
+  default_stage_access_log_format          = try(each.value.default_stage_access_log_format,{})
   create_api_domain_name                   = false # to control creation of API Gateway Domain Name
   create_default_stage                     = false # to control creation of "$default" stage
   create_default_stage_api_mapping         = false # to control creation of "$default" stage and API mapping
