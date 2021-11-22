@@ -3,7 +3,7 @@ module "functions" {
   source   = "terraform-aws-modules/lambda/aws"
   for_each = local.functions
   depends_on = [
-    module.vpcs, module.api_gateways
+    module.vpcs
   ]
 
   function_name          = each.value.function_name
