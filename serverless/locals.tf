@@ -46,6 +46,14 @@ locals {
 
 }
 
+locals {
+  allowed_triggers = {
+    for func_key, func_value in local.functions :
+    
+
+  }
+}
+
 
 # locals {
 #   cognito_userpools_integration = local.combined_objects_cognito_userpools
