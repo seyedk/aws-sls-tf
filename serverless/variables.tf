@@ -54,4 +54,4 @@ variable "s3_buckets" {
 variable "lambda_layers" {}
 
 
-
+variable "allowed_triggers" {}
