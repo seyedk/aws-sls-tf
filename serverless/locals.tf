@@ -33,7 +33,12 @@ locals {
 
   # todo: uncomment the following lines to add the resource
    dynamodb_tables = try(var.dynamodb_tables, {})
-   step_function = try(var.step_functions, {})
+   step_functions = try(var.step_functions, {})
+   acms = try(var.acms, {})
+
+   s3_buckets = try(var.s3_buckets, {})
+
+   lambda_layers = try(var.lambda_layers,{})
 
 
 }
@@ -80,13 +85,13 @@ locals {
 
 }
 
-locals {
-  allowed_triggers = {
-    for func_key, func_value in local.functions :
+# locals {
+#   allowed_triggers = {
+#     for func_key, func_value in local.functions :
     
 
-  }
-}
+#   }
+# }
 
 
 

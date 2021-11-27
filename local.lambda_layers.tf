@@ -1,4 +1,4 @@
 
 locals {
-  functions = merge(try(var.serverless.lambda_layers, {}), {})
+  lambda_layers = merge(try(var.serverless.lambda_layers, {}), {})
 }

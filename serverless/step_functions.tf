@@ -8,6 +8,6 @@ module "step_functions" {
   definition = each.value.definition
 }
 
-output "functions" {
+output "step_functions" {
   value = module.step_functions
 }

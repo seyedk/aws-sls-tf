@@ -39,7 +39,19 @@ variable "acms" {
   default={}
 }
 
+variable "dynamodb_tables" {
+    default = {}
+}
 
+variable "step_functions" {
+    default = {}
+}
+
+variable "s3_buckets" {
+    default = {}
+}
+
+variable "lambda_layers" {}
 
 
 

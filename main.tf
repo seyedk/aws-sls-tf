@@ -29,7 +29,8 @@ module "aws_sls_model" {
    step_functions = local.step_functions
 
    acms = local.acms
-  # s3_buckets = local.s3_buckets
+   s3_buckets = local.s3_buckets
+   lambda_layers = local.lambda_layers
   # s3_bucket_objects = local.s3_bucket_objects
 
 

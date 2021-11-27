@@ -49,9 +49,7 @@ output "remote_info_cognito_userpools" {
 output "remote_info_step_functions" {
     value = local.remote.step_functions
 }
-output "remote_info_vpcs" {
-    value = local.remote.vpcs
-}
+
 output "remote_info_dynamodb_tables" {
     value = local.remote.dynamodb_tables
 }

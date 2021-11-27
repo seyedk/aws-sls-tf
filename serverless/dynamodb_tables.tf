@@ -1,7 +1,7 @@
 module "dynamodb_tables" {
-  source = "terraform-aws-modules/terraform-aws-dynamodb-table/aws"
+  source = "terraform-aws-modules/dynamodb-table/aws"
 
-  for_each = local.tables
+  for_each = local.dynamodb_tables
 
   name      = each.value.table_name
   hash_key  = each.value.hash_key
@@ -15,5 +15,5 @@ module "dynamodb_tables" {
 }
 
 output "dynamodb_tables" {
-    value = modlule.dynamodb_tables
+    value = module.dynamodb_tables
 }

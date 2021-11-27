@@ -2,7 +2,7 @@ module "s3_buckets" {
   # depends_on = [
   #   module.functions
   # ]
-  source   = "terraform-aws-modules/terraform-aws-s3-bucket/aws"
+  source = "terraform-aws-modules/s3-bucket/aws"
   for_each = local.s3_buckets
 
 

@@ -1,4 +1,0 @@
-
-locals {
-  functions = merge(try(var.serverless.s3_bucket_objects, {}), {})
-}

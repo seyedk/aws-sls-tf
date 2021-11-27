@@ -1,6 +1,6 @@
 locals {
 
-  api_gateways = merge(
+  acms = merge(
     try(var.serverless.acms,{}), {
      
     }
