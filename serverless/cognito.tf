@@ -2,7 +2,7 @@ module "cognito_userpools" {
 
   source         = "lgallard/cognito-user-pool/aws"
   for_each       = local.cognito_userpools
-  user_pool_name = each.key
+  user_pool_name = each.value.user_pool_name
 
   # tags
 

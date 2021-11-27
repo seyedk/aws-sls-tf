@@ -21,6 +21,14 @@ module "aws_sls_model" {
 
   cognito_userpools = local.cognito_userpools
 
+  # todo: the following line would add cloudfront and dynamodb tables
+
+  # cloud_fronts = local.cloud_front_distributions
+  # todo: the following line would add cloudfront and dynamodb tables
+   dynamodb_tables = local.dynamodb_tables
+   step_functions = local.step_functions
+
+   acms = local.acms
   # s3_buckets = local.s3_buckets
   # s3_bucket_objects = local.s3_bucket_objects
 

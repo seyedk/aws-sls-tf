@@ -35,6 +35,10 @@ variable "cognito_userpools" {
   default = {}
 }
 
+variable "acms" {
+  default={}
+}
+
 
 
 

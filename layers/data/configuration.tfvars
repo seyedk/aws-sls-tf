@@ -61,13 +61,13 @@ serverless = {
       ]
 
       # user_pool_domain
-      domain = "mydomain-com"
+      domain = "mydomain-com2"
 
       # client
       client_name                                 = "client0"
       client_allowed_oauth_flows_user_pool_client = false
-      client_callback_urls                        = ["https://mydomain.com/callback"]
-      client_default_redirect_uri                 = "https://mydomain.com/callback"
+      client_callback_urls                        = ["https://mydomain2.com/callback"]
+      client_default_redirect_uri                 = "https://mydomain2.com/callback"
       client_read_attributes                      = ["email"]
       client_refresh_token_validity               = 30
 
@@ -77,8 +77,8 @@ serverless = {
       user_group_description = "My group"
 
       # ressource server
-      resource_server_identifier        = "https://mydomain.com"
-      resource_server_name              = "mydomain"
+      resource_server_identifier        = "https://mydomain2.com"
+      resource_server_name              = "mydomain2"
       resource_server_scope_name        = "scope"
       resource_server_scope_description = "a Sample Scope Description for mydomain"
 
@@ -185,6 +185,35 @@ serverless = {
 
     }
   }
+  lambda_layers = {
+    lambda-layer-1 = {
+      description         = "My amazing lambda layer (deployed from S3)"
+      compatible_runtimes = ["python3.8"]
+
+      source_path = "src/function1/index.py"
+
+      store_on_s3 = false
+
+    }
+    lambda-layer-2 = {
+      description         = "My amazing lambda layer (deployed from S3)"
+      compatible_runtimes = ["python3.8"]
+
+      source_path = "src/function1/index.py"
+
+      store_on_s3 = false
+
+    }
+   lambda-layer-2 = {
+      description         = "My amazing lambda layer (deployed from S3)"
+      compatible_runtimes = ["python3.8"]
+
+      source_path = "src/function1/index.py"
+
+      store_on_s3 = false
+
+    }
+  }
   tags = {
     application_name = "data"
     owner            = "seyed"
@@ -208,6 +237,7 @@ serverless = {
       encrypt        = true
 
     }
+
 
   }
 }

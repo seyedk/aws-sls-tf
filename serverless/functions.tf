@@ -1,9 +1,12 @@
 
+
+## this function is called to create functions, and if a layer
+## is needed, it should be created in Lambda Layer Module. 
 module "functions" {
   source   = "terraform-aws-modules/lambda/aws"
   for_each = local.functions
   depends_on = [
-    module.vpcs
+    module.vpcs, module.lambda_layers
   ]
 
   function_name          = each.value.function_name
@@ -18,6 +21,9 @@ module "functions" {
   publish = true
   # allowed_triggers = try(each.value.allowed_triggers, {})
   allowed_triggers = try(local.allowed_triggers[each.key])
+
+  layers = local.lambda_layers[each.key]
+  
 
 }
 

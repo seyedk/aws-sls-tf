@@ -3,7 +3,7 @@
 
 DefaultRegion="us-west-2"
 TenantId="9ca75128-a244-4596-877b-f24828e476e2"
-RoleArn="arn:aws:iam::539790979880:role/AWS-InnovationLabs-Beta-Admin"
+RoleArn="arn:aws:iam::446490546198:role/oclab-infra"
 ProfileName="aws-sls-tf"
 Duration=2
 
