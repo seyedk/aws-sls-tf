@@ -45,3 +45,10 @@ variable "cognito_userpools" {
 
   default = {}
 }
+
+variable "step_functions" {
+  default = {}
+}
+variable "dynamodb_tables" {
+  default = {}
+}

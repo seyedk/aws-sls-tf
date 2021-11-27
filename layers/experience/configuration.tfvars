@@ -13,7 +13,9 @@ serverless = {
       description   = "experience 1 lambda function"
       handler       = "index.lambda_handler"
       runtime       = "python3.8"
-      source_path   = "../../src/function2.zip"
+      source_path   = "src/public_function/index.py"
+
+
       tags = {
         environment = "dev"
         developer   = "seyedk"
@@ -26,7 +28,9 @@ serverless = {
       description   = "experience 2 lambda function"
       handler       = "index.lambda_handler"
       runtime       = "python3.8"
-      source_path   = "../../src/functionB.zip"
+      source_path   = "src/public_function/index.py"
+
+
       tags = {
         environment = "dev"
         developer   = "seyedk"
@@ -38,7 +42,8 @@ serverless = {
       description   = "experience 3 lambda function"
       handler       = "index.lambda_handler"
       runtime       = "python3.8"
-      source_path   = "../../src/functionB.zip"
+      source_path   = "src/public_function/index.py"
+
       tags = {
         environment = "dev"
         developer   = "seyedk"
@@ -59,7 +64,7 @@ serverless = {
 
   }
   api_gateways = {}
-  vpcs   = {}
+  vpcs         = {}
   tfstates     = {}
 
 

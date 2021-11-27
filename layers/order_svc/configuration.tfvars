@@ -19,7 +19,7 @@ serverless = {
         allow_origins = ["*"]
       }
 
-      # Custom domain
+      # # Custom domain
       domain_name                 = "api.example.com"
       domain_name_certificate_arn = "arn:aws:acm:us-east-1:539790979880:certificate/386acf1c-ac20-4348-b0eb-a7615c2e89e9"
 
@@ -38,21 +38,21 @@ serverless = {
       integrations = {
 
         "POST /" = {
-          service_name           = "data"
-          function_name          = "function1"
+          layer_key           = "data"
+          function_key          = "function1"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
         }
         "GET /" = {
-          service_name           = "experience"
-          function_name          = "function_B"
+          layer_key           = "experience"
+          function_key          = "function_B"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
 
         }
         "POST /services" = {
-          service_name           = "data"
-          function_name          = "public_function"
+          layer_key           = "data"
+          function_key          = "public_function"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
         }
@@ -71,12 +71,12 @@ serverless = {
       }
 
       # Custom domain
-      # domain_name                 = "api.example.com"
-      # domain_name_certificate_arn = "arn:aws:acm:us-east-1:539790979880:certificate/386acf1c-ac20-4348-b0eb-a7615c2e89e9"
+      domain_name                 = "api.example.com"
+      domain_name_certificate_arn = "arn:aws:acm:us-east-1:539790979880:certificate/386acf1c-ac20-4348-b0eb-a7615c2e89e9"
 
-      # # Access logs
-      # default_stage_access_log_destination_arn = "arn:aws:logs:us-east-1:539790979880:log-group:debug-apigateway"
-      # default_stage_access_log_format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"
+      # Access logs
+      default_stage_access_log_destination_arn = "arn:aws:logs:us-east-1:539790979880:log-group:debug-apigateway"
+      default_stage_access_log_format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"
 
 
 
@@ -88,14 +88,14 @@ serverless = {
       integrations = {
 
         "POST /users" = {
-          service_name           = "experience"
-          function_name          = "function_3"
+          layer_key           = "experience"
+          function_key          = "function_3"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
         }
         "GET /users" = {
-          service_name           = "experience"
-          function_name          = "function_3"
+          layer_key           = "experience"
+          function_key          = "function_3"
           payload_format_version = "2.0"
           timeout_milliseconds   = 12000
 

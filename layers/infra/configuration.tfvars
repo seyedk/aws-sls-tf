@@ -4,6 +4,8 @@ serverless = {
   key                 = "infra"
   tfstate_bucket_name = "seyedk-tf-accelerator-state-mgmt"
 
+
+
     vpcs = {
 
       db_vpc = {
@@ -26,8 +28,6 @@ serverless = {
         # Add public_subnets and NAT Gateway to allow access to internet from Lambda
         public_subnets     = ["10.11.1.0/24", "10.11.2.0/24", "10.11.3.0/24"]
         enable_nat_gateway = false
-
-
 
       }
 
