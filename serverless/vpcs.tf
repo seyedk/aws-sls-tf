@@ -8,7 +8,7 @@ module "vpcs" {
   #   depends_on = []
 
   source   = "terraform-aws-modules/vpc/aws"
-  for_each = try(local.vpcs,  {})
+  for_each = try(local.vpcs, {})
   #todo: do we want to add the security groups here? I guess so!
   #   security_groups = module.security_groups
 
@@ -21,7 +21,7 @@ module "vpcs" {
   # Add public_subnets and NAT Gateway to allow access to internet from Lambda
   public_subnets     = each.value.public_subnets
   enable_nat_gateway = each.value.enable_nat_gateway
- 
+
 }
 
 variable "vpcs" {

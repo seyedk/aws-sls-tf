@@ -1,32 +1,30 @@
 variable "global_settings" {
-    default = {}
+  default = {}
 }
 variable "tfstates" {
-    default = {}
+  default = {}
 }
 variable "tags" {
-    default = {}
+  default = {}
 }
 variable "remote_objects" {
-    default = {}
+  default = {}
 }
 variable "current_serverless_key" {
-    default = {}
+  default = {}
 }
 variable "serverless" {
-    default = {}
+  default = {}
 }
 variable "api_gateways" {
-    default = {}
+  default = {}
 }
-variable "integrations" {
-    default = {}
-}
+
 variable "functions" {
-    default = {}
-} 
+  default = {}
+}
 variable "client_config" {
-    default = {}
+  default = {}
 }
 
 
@@ -36,22 +34,22 @@ variable "cognito_userpools" {
 }
 
 variable "acms" {
-  default={}
+  default = {}
 }
 
 variable "dynamodb_tables" {
-    default = {}
+  default = {}
 }
 
 variable "step_functions" {
-    default = {}
+  default = {}
 }
 
 variable "s3_buckets" {
-    default = {}
+  default = {}
 }
 
 variable "lambda_layers" {}
 
 
-variable "allowed_triggers" {}
+variable "api_integrations" {}

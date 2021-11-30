@@ -31,76 +31,59 @@ locals {
   # todo: uncomment the following lines to add the resource
   # cloud_front_distributions = try(var.cloudfront_distributions, {})
 
-  # todo: uncomment the following lines to add the resource
-   dynamodb_tables = try(var.dynamodb_tables, {})
-   step_functions = try(var.step_functions, {})
-   acms = try(var.acms, {})
 
-   s3_buckets = try(var.s3_buckets, {})
+  dynamodb_tables = try(var.dynamodb_tables, {})
+  step_functions  = try(var.step_functions, {})
+  acms            = try(var.acms, {})
 
-   lambda_layers = try(var.lambda_layers,{})
+  s3_buckets = try(var.s3_buckets, {})
 
+  lambda_layers = try(var.lambda_layers, {})
 
+  api_integrations = try(var.api_integrations, {})
 }
-
 
 locals {
-  integrations_old = {
-    for api_key, api_value in local.api_gateways :
-    api_key => {
-      for key, value in api_value.integrations :
-      key => {
-        lambda_arn             = local.combined_objects_functions[value.service_name][value.function_name].lambda_function_arn
-        payload_format_version = try(value.payload_format_version, "2.0")
-        timeout_milliseconds   = try(value.timeout_milliseconds, 12000)
-
-      }
-      if value.integration_type != "AWS_PROXY"
-    }
-  }
 
   integrations = {
-    for api_key, api_value in local.api_gateways :
-    api_key => {
-      for key, value in api_value.integrations :
-      key => merge(
-
-        try(value.lambda_arn, {}) == {} ? {} : { lambda_arn = local.combined_objects_functions[value.layer_key][value.function_key].lambda_function_arn },
-        try(value.authorization_type, {}) == {} ? {} : { authorization_type = value.authorization_type },
-        try(value.payload_format_version, {}) == {} ? {} : { payload_format_version = value.payload_format_version },
-        try(value.timeout_milliseconds, {}) == {} ? {} : { timeout_milliseconds = value.timeout_milliseconds },
-        try(value.credentials_arn, {}) == {} ? {} : { credentials_arn = value.credentials_arn },
-        try(value.authorizer_id, {}) == {} ? {} : { authorizer_id = value.authorizer_id },
-        try(value.request_parameters, {}) == {} ? {} : { request_parameters = jsonencode(value.request_parameters )},
-        try(value.response_parameters, {}) == {} ? {} : { response_parameters = jsonencode(value.response_parameters )},
-      )
 
 
+    for key, value in local.api_integrations :
 
 
+    key => merge(
+
+     
+      try(value.api_key, {}) == {} ? {} : { api_id = local.combined_objects_api_gateways[value.api_layer_key][value.api_key].apigatewayv2_api_id },
+      try(value.function_key, {}) == {} ? {} : { lambda_arn = local.combined_objects_functions[value.layer_key][value.function_key].lambda_function_arn },
+      try(value.authorization_type, {}) == {} ? {} : { authorization_type = value.authorization_type },
+      try(value.payload_format_version, {}) == {} ? {} : { payload_format_version = value.payload_format_version },
+      try(value.timeout_milliseconds, {}) == {} ? {} : { timeout_milliseconds = value.timeout_milliseconds },
+      try(value.credentials_arn, {}) == {} ? {} : { credentials_arn = value.credentials_arn },
+      try(value.authorizer_id, {}) == {} ? {} : { authorizer_id = value.authorizer_id },
+      try(value.request_parameters, {}) == {} ? {} : { request_parameters = jsonencode(value.request_parameters) },
+      try(value.response_parameters, {}) == {} ? {} : { response_parameters = jsonencode(value.response_parameters) },
+     
+    )
 
 
-    }
   }
-
 }
+locals {
+  allowed_triggers = {
 
-# locals {
-#   allowed_triggers = {
-#     for func_key, func_value in local.functions :
-    
+    for fkey, fvalue in local.functions :
+    fkey => {
+      for key, value in fvalue.allowed_triggers :
+      key => {
+        service    = value.service
+        source_arn = "${local.combined_objects_api_gateways[value.layer_key][value.api_key].apigatewayv2_api_execution_arn}/*/*"
 
-#   }
-# }
+      }
+    }
 
-
-
-
-
-# locals {
-#   cognito_userpools_integration = local.combined_objects_cognito_userpools
-
-# }
+  }
+}
 
 
 locals {
@@ -113,13 +96,6 @@ locals {
       vpc_security_group_ids = lookup(f_value, "vpc_info", null) == null ? null : local.combined_objects_vpcs[f_value.vpc_info.layer_key][f_value.vpc_info.vpc_key]["default_security_group_id"]
     }
   }
-}
-output "my_vpc_info" {
-  value = local.vpc_info
-}
-
-output "lambda_integrations" {
-  value = local.integrations
 }
 
 

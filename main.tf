@@ -2,8 +2,8 @@ module "aws_sls_model" {
 
   source = "./serverless"
 
-  functions    = local.functions
   api_gateways = local.api_gateways
+  functions    = local.functions
   vpcs   = local.vpcs
   #  static_websites        = local.static_websites
   #  dynamodb_tables        = local.ddb_tables
@@ -16,7 +16,7 @@ module "aws_sls_model" {
   remote_objects = local.remote
 
   current_serverless_key = var.serverless.key
-  integrations           = {}
+  api_integrations           = try(local.api_integrations, {})
   client_config          = {}
 
   cognito_userpools = local.cognito_userpools
@@ -31,7 +31,9 @@ module "aws_sls_model" {
    acms = local.acms
    s3_buckets = local.s3_buckets
    lambda_layers = local.lambda_layers
+ 
   # s3_bucket_objects = local.s3_bucket_objects
+ 
 
 
 

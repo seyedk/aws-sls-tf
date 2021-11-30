@@ -68,21 +68,21 @@ locals {
   )
 }
 
-output "combined_objects_functions" {
-  value = local.combined_objects_functions
+# output "combined_objects_functions" {
+#   value = local.combined_objects_functions
 
-}
+# }
 
-output "combined_objects_apigateway" {
-  value = local.combined_objects_api_gateways
-}
+# output "combined_objects_apigateway" {
+#   value = local.combined_objects_api_gateways
+# }
 
-output "combined_objects_vpcs" {
-  value = local.combined_objects_vpcs
+# output "combined_objects_vpcs" {
+#   value = local.combined_objects_vpcs
 
-}
+# }
 
-output "combined_objects_step_functions" {
-  value = local.combined_objects_step_functions
-}
+# output "combined_objects_step_functions" {
+#   value = local.combined_objects_step_functions
+# }
 

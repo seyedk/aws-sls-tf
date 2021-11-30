@@ -33,7 +33,7 @@ variable "api_gateways" {
 }
 
 
-variable "integrations" {
+variable "api_integrations" {
   default = {
 
   

@@ -2,7 +2,7 @@ module "s3_buckets" {
   # depends_on = [
   #   module.functions
   # ]
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source   = "terraform-aws-modules/s3-bucket/aws"
   for_each = local.s3_buckets
 
 
@@ -16,14 +16,14 @@ module "s3_buckets" {
 
   attach_deny_insecure_transport_policy = each.value.attach_deny_insecure_transport_policy
 
-  tags = each.value.tags
+  tags       = each.value.tags
   versioning = each.value.versioning_enabled
 
   website = each.value.website
 
   logging = each.value.logging
 
-  cors_rule =try(each.value.cors_rule, [])
+  cors_rule = try(each.value.cors_rule, [])
 
   lifecycle_rule = try(each.value.lifecycle_rule, [])
 

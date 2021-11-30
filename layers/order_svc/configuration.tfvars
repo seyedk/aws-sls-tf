@@ -1,11 +1,64 @@
 serverless = {
   backend_type        = "s3"
   global_settings_key = "application"
-  key                 = "orders_service"
+  key                 = "order_svc"
   tfstate_bucket_name = "seyedk-tf-accelerator-state-mgmt"
 
 
+  api_integrations = {
 
+    "POST /users" = {
+      layer_key              = "experience"
+      function_key           = "function_3"
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 12000
+      # integration_type = "AWS_PROXY"
+      api_key       = "api2"
+      api_layer_key = "order_svc"
+
+    }
+    "GET /users" = {
+      layer_key              = "order_svc"
+      function_key           = "notification_function"
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 12000
+      # integration_type = "AWS_PROXY"
+      api_key       = "api2"
+      api_layer_key = "order_svc"
+
+
+    }
+
+    "POST /" = {
+      layer_key              = "data"
+      function_key           = "function1"
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 12000
+      # integration_type = "AWS_PROXY"
+      api_key       = "api1"
+      api_layer_key = "order_svc"
+    }
+    "GET /" = {
+      layer_key              = "experience"
+      function_key           = "function_B"
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 12000
+      # integration_type = "AWS_PROXY"
+      api_key       = "api1"
+      api_layer_key = "order_svc"
+
+    }
+    "POST /services" = {
+      layer_key              = "data"
+      function_key           = "public_function"
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 12000
+      # integration_type = "AWS_PROXY"
+      api_key       = "api1"
+      api_layer_key = "order_svc"
+
+    }
+  }
 
 
   api_gateways = {
@@ -35,28 +88,7 @@ serverless = {
 
 
 
-      integrations = {
 
-        "POST /" = {
-          layer_key           = "data"
-          function_key          = "function1"
-          payload_format_version = "2.0"
-          timeout_milliseconds   = 12000
-        }
-        "GET /" = {
-          layer_key           = "experience"
-          function_key          = "function_B"
-          payload_format_version = "2.0"
-          timeout_milliseconds   = 12000
-
-        }
-        "POST /services" = {
-          layer_key           = "data"
-          function_key          = "public_function"
-          payload_format_version = "2.0"
-          timeout_milliseconds   = 12000
-        }
-      }
 
 
     }
@@ -85,22 +117,7 @@ serverless = {
         environment = "QA"
       }
 
-      integrations = {
 
-        "POST /users" = {
-          layer_key           = "experience"
-          function_key          = "function_3"
-          payload_format_version = "2.0"
-          timeout_milliseconds   = 12000
-        }
-        "GET /users" = {
-          layer_key           = "experience"
-          function_key          = "function_3"
-          payload_format_version = "2.0"
-          timeout_milliseconds   = 12000
-
-        }
-      }
 
 
     }
@@ -113,7 +130,32 @@ serverless = {
 
   }
 
-  functions = {}
+  functions = {
+    notification_function = { # this key will be used for later refrences
+      function_name = "my-lambda_100"
+      description   = "my awesome lambda function"
+      handler       = "index.lambda_handler"
+      runtime       = "python3.8"
+      source_path   = "../src/function1/index.py"
+      tags = {
+        environment = "dev"
+        developer   = "seyedk"
+
+      }
+
+
+      allowed_triggers = {
+
+        APIGatewayDevPost = {
+          service   = "apigateway"
+          layer_key = "order_svc"
+          api_key   = "api1"
+        }
+
+      }
+
+    }
+  }
   vpcs = {}
 
   tags = {
@@ -133,6 +175,13 @@ serverless = {
     }
     experience = {
       tfstate = "experience/terraform.tfstate"
+
+      region         = "us-east-1"
+      dynamodb_table = "seyedk-tf-accelerator-state-mgmt"
+      encrypt        = true
+    }
+    order_svc = {
+      tfstate = "order_svc/terraform.tfstate"
 
       region         = "us-east-1"
       dynamodb_table = "seyedk-tf-accelerator-state-mgmt"

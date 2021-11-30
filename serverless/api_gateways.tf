@@ -17,17 +17,17 @@ module "api_gateways" {
 
   # # Access logs
   default_stage_access_log_destination_arn = try(each.value.default_stage_access_log_destination_arn, null)
-  default_stage_access_log_format          = try(each.value.default_stage_access_log_format,null)
+  default_stage_access_log_format          = try(each.value.default_stage_access_log_format, null)
   create_api_domain_name                   = false # to control creation of API Gateway Domain Name
   create_default_stage                     = false # to control creation of "$default" stage
   create_default_stage_api_mapping         = false # to control creation of "$default" stage and API mapping
-  create_routes_and_integrations           = true # to control creation of routes and integrations
+  create_routes_and_integrations           = true  # to control creation of routes and integrations
   create_vpc_link                          = false # to control creation of VPC link
 
 
   # Routes and integrations
-  integrations = local.integrations[each.key]
-  
+  #  integrations = try(local.integrations[each.key], {})
+
 
 
   tags = each.value.tags

@@ -5,7 +5,7 @@
 module "lambda_layers" {
   source   = "terraform-aws-modules/lambda/aws"
   for_each = local.lambda_layers
-  
+
 
 
 

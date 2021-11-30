@@ -45,11 +45,11 @@ locals {
 }
 
 
-output "all_remote_states" {
-  value = {
-    for key, value in data.terraform_remote_state.remote : key => value
-  }
-}
+# output "all_remote_states" {
+#   value = {
+#     for key, value in data.terraform_remote_state.remote : key => value
+#   }
+# }
 
 
 ## data.terraform_remote_state.db.outputs.address

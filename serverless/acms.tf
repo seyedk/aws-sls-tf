@@ -1,18 +1,18 @@
-module "acm" {
-  source  = "terraform-aws-modules/acm/aws"
-  version = "~> 3.0"
+module "acms" {
+  source   = "terraform-aws-modules/acm/aws"
+  for_each = local.acms
+  version  = "~> 3.0"
 
-  domain_name  = "my-domain.com"
-  zone_id      = "Z2ES7B9AZ6SHAE"
+  domain_name = each.value.domain_name
+  zone_id     = each.value.zone_id
 
-  subject_alternative_names = [
-    "*.my-domain.com",
-    "app.sub.my-domain.com",
-  ]
+  subject_alternative_names = each.value.subject_alternative_names
 
-  wait_for_validation = true
+  wait_for_validation = each.value.wait_for_validation
 
-  tags = {
-    Name = "my-domain.com"
-  }
+  tags = each.value.tags
+}
+
+output "acms" {
+  value = module.acms
 }

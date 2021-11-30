@@ -15,5 +15,5 @@ module "dynamodb_tables" {
 }
 
 output "dynamodb_tables" {
-    value = module.dynamodb_tables
+  value = module.dynamodb_tables
 }
