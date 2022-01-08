@@ -149,7 +149,7 @@ serverless = {
         APIGatewayDevPost = {
           service   = "apigateway"
           layer_key = "order_svc"
-          api_key   = "api1"
+          api_key   = "api2"
         }
 
       }

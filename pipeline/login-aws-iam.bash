@@ -13,7 +13,7 @@ Duration=2
 export AWS_PROFILE="$profile_name"
 
 # export AWS_PROFILE=oclab
-    # export ASSUME_ROLE_JSON=$(aws sts assume-role --role-arn $ROLE_ARN --role-session-name sls-tf --no-verify-ssl)
+# export ASSUME_ROLE_JSON=$(aws sts assume-role --role-arn $ROLE_ARN --role-session-name sls-tf --no-verify-ssl)
 assume_role_result_json=$(aws sts assume-role --role-arn $role_arn --role-session-name sls-tf --no-verify-ssl)
 AccessKeyId=$(echo $assume_role_result_json | jq '.Credentials.AccessKeyId' | tr -d \")
 SecretAccessKey=$(echo $assume_role_result_json | jq '.Credentials.SecretAccessKey' | tr -d \")

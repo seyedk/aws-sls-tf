@@ -34,9 +34,6 @@ module "aws_sls_model" {
  
   # s3_bucket_objects = local.s3_bucket_objects
  
-
-
-
 }
 
 output "objects" {
