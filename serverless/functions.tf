@@ -13,12 +13,15 @@ module "functions" {
   description            = each.value.description
   handler                = each.value.handler
   runtime                = each.value.runtime
-  source_path            = each.value.source_path
+  # source_path            = each.value.source_path
+  local_existing_package                = each.value.local_existing_package
   tags                   = each.value.tags
   vpc_subnet_ids         = local.vpc_info[each.key].vpc_subnet_ids
   vpc_security_group_ids = [local.vpc_info[each.key].vpc_security_group_ids]
   attach_network_policy  = true
-  publish                = true
+  publish                = false
+  create_package         = false
+  # create_current_version_allowed_triggers = false
   # allowed_triggers = try(each.value.allowed_triggers, {})
   allowed_triggers = try(local.allowed_triggers[each.key], {})
 

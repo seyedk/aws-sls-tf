@@ -74,7 +74,7 @@ locals {
 
     for fkey, fvalue in local.functions :
     fkey => {
-      for key, value in fvalue.allowed_triggers :
+      for key, value in try(fvalue.allowed_triggers,{}) :
       key => {
         service    = value.service
         source_arn = "${local.combined_objects_api_gateways[value.layer_key][value.api_key].apigatewayv2_api_execution_arn}/*/*"
