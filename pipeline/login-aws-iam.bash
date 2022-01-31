@@ -4,7 +4,7 @@
 ################################################################################################
 profile_name=$1
 role_arn=$2
-# role_arn= "arn:aws:iam::446490546198:role/oclab-infra"
+#export role_arn="arn:aws:iam::446490546198:role/oclab-infra"
 Duration=2
 
 # if [[ -z $1 ]]; then exit 1 fi

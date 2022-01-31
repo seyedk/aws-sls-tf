@@ -196,6 +196,36 @@ serverless = {
       }
 
     }
+
+      Tony_function = {
+      function_name = "my-lambda_b"
+      description   = "my awesome lambda function"
+      handler       = "index.lambda_handler"
+      runtime       = "python3.8"
+      source_path   = "src/private_function/index.py"
+      tags = {
+        environment = "dev"
+        developer   = "seyedk"
+
+      }
+      vpc_info = {
+
+        layer_key  = "infra"
+        vpc_key    = "db_vpc"
+        subnet_key = "public_subnets"
+
+
+      }
+      vpc_info2 = {
+        infra = {
+          vpc_key    = "data_vpc"
+          subnet_key = "public_subnets"
+
+        }
+      }
+
+    }
+
   }
   lambda_layers = {
     lambda-layer-1 = {
