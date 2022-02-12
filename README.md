@@ -8,13 +8,13 @@ The AWS-SLS-TF (the AWS Serverless with terraform) is an opiniated appraoch to i
 
 3. Layered Architecture where different resource owners (or implementation teams) deploy terraform and share the resources with other team members. As an example, the NOC team may create Networking resources and provide VPC endpoints, security groups, and subnet details to application development teams who will use those to create `aws lambda functions` within a VPC subnet.
 
-The following diagram shows the above objectives:
+The following diagram shows the above objectives:  
 
-<SPAN> </SPAN><IMG  src="https://documents.lucid.app/documents/ec4de390-a74f-45ae-9638-fd18cdb98cbf/pages/YG8x~rJwm_PR?a=4262&amp;x=1180&amp;y=153&amp;w=2942&amp;h=1477&amp;store=1&amp;accept=image%2F*&amp;auth=LCA%20c9d651fcda6bfc490b7d62a5dde04a69321d22c8-ts%3D1630560969"  />
+![](docs/img/terraform%20architecture%20bg-white.png)
 
 4)Manging the layers by using Terraform State management features such as remote states, where the resources on each layer in the architecture is available to other layers in a mixture shown below:
 
-<SPAN> </SPAN><IMG  src="https://documents.lucid.app/documents/ec4de390-a74f-45ae-9638-fd18cdb98cbf/pages/H1txgW5Ht9b2?a=4262&amp;x=-131&amp;y=83&amp;w=2882&amp;h=814&amp;store=1&amp;accept=image%2F*&amp;auth=LCA%20492dd28ba8a2f8016e1ab285548b04f2154b2e41-ts%3D1630560969" />
+![](docs/img/terraform%20architecture%20-%20State%20mgmt%20conceptual.png)
 
 5)This is not meant for Serverless only, but we begin with a simple concept like serverless to build and warm up our team; later we'll evolve to cover more advanced scenarios.
 
