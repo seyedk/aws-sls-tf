@@ -15,10 +15,7 @@ module "aws_sls_model" {
   tags           = local.tags
   remote_objects = local.remote
 
-
-
-  # Debugging: Todo: Remove this or make it configurable
-  current_serverless_key = "notification"
+  current_serverless_key = var.serverless_key
   api_integrations       = try(local.api_integrations, {})
   client_config          = {}
 
@@ -43,7 +40,7 @@ output "objects" {
   sensitive = true
   value = tomap(
     {
-      (var.serverless.key) = {
+      (var.serverless_key) = {
         for key, value in module.aws_sls_model : key => value
         if try(value, {}) != {}
       }
