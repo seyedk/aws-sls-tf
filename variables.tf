@@ -1,6 +1,5 @@
 variable "global_settings" {
   default = {}
-
 }
 
 variable "client_config" {
@@ -13,12 +12,8 @@ variable "current_serverless_key" {
 
 }
 
-
-
-
 variable "remote_objects" {
   default = {}
-
 }
 
 # variable "tfstate_bucket_name" {} 

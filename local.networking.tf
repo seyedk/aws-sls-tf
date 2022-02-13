@@ -1,7 +1,7 @@
 locals {
 
-  vpcs = merge(try(var.serverless.vpcs,{}),{})
-  
-  
+  vpcs = merge(try(var.vpcs, {}), {})
+
+
 }
 
