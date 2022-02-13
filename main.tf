@@ -2,9 +2,9 @@ module "aws_sls_model" {
 
   source = "./aws"
 
-  api_gateways = local.api_gateways
-  functions    = local.functions
-  vpcs         = local.vpcs
+  api_gateways = try(local.api_gateways, {})
+  functions    = try(local.functions, {})
+  vpcs         = try(local.vpcs, {})
   #  static_websites        = local.static_websites
   #  dynamodb_tables        = local.ddb_tables
   global_settings = local.global_settings
@@ -25,12 +25,12 @@ module "aws_sls_model" {
 
   # cloud_fronts = local.cloud_front_distributions
   # todo: the following line would add cloudfront and dynamodb tables
-  dynamodb_tables = local.dynamodb_tables
-  step_functions  = local.step_functions
+  dynamodb_tables = try(local.dynamodb_tables, {})
+  step_functions  = try(local.step_functions, {})
 
-  acms          = local.acms
-  s3_buckets    = local.s3_buckets
-  lambda_layers = local.lambda_layers
+  acms          = try(local.acms, {})
+  s3_buckets    = try(local.s3_buckets, {})
+  lambda_layers = try(local.lambda_layers, {})
 
   # s3_bucket_objects = local.s3_bucket_objects
 
