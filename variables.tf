@@ -36,7 +36,7 @@ variable "api_gateways" {
 variable "api_integrations" {
   default = {
 
-  
+
 
   }
 }
@@ -52,3 +52,5 @@ variable "step_functions" {
 variable "dynamodb_tables" {
   default = {}
 }
+
+variable "serverless_key" {}
