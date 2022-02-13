@@ -1,17 +1,17 @@
-locals {
+// locals {
 
-  serverless = {
+//   serverless = {
 
-    current = {
+//     current = {
 
-      s3_bucket_name = var.serverless.tfstate_bucket_name
-    }
-    # lower = {
+//       s3_bucket_name = var.serverless.tfstate_bucket_name
+//     }
+//     # lower = {
 
-    #   s3_bucket_name = var.tfstate_bucket_name
-    # }
-  }
-}
+//     #   s3_bucket_name = var.tfstate_bucket_name
+//     # }
+//   }
+// }
 
 data "terraform_remote_state" "remote" {
   for_each = try(var.serverless.tfstates, {})

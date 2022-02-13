@@ -15,7 +15,10 @@ module "aws_sls_model" {
   tags           = local.tags
   remote_objects = local.remote
 
-  current_serverless_key = var.serverless.key
+
+
+  # Debugging: Todo: Remove this or make it configurable
+  current_serverless_key = "notification"
   api_integrations       = try(local.api_integrations, {})
   client_config          = {}
 
